@@ -1,10 +1,11 @@
-var key = require("./key.js");
+var keys = require("./keys.js");
 var Twitter = require("twitter");
 var request = require("request");
 var Spotify = require('node-spotify-api');
 var fs = require("fs");
 
-var client = new Twitter(key.twitterKeys);
+var client = new Twitter(keys.twitterKeys);
+
 var input1 = process.argv[2];
 var input2 = process.argv.slice(3);
 
@@ -30,10 +31,7 @@ function spotifyApi() {
         input2 = "The Sign Ace of Base";
     };
 
-    var spotify = new Spotify({
-        id: "ba9d27ff0d2e44a299ab27804a8157cd",
-        secret: "4daa856386964c91b1845b8058e5492f"
-    });
+    var spotify = new Spotify(keys.spotifyKeys);
 
     spotify.search({
         type: 'track',
@@ -68,6 +66,10 @@ function omdbApi() {
         }
     });
 }
+
+// function logInfo() {
+// 	fs.appendFile("log.txt", )
+// }
 
 if (input1 === "my-tweets") {
 	twitterApi();
